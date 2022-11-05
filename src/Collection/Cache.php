@@ -33,10 +33,10 @@ if (!class_exists('WPTrait\Collection\Cache')) {
 
         public function remember($key, $callback, $group = '', $expire = 0)
         {
-            $found = false;
+            
             $cached = $this->get($key, $group, false, $found);
 
-            if (false !== $found) {
+            if (!$cached) {
                 return $cached;
             }
 
@@ -51,10 +51,10 @@ if (!class_exists('WPTrait\Collection\Cache')) {
 
         public function forget($key, $group = '', $default = null)
         {
-            $found = false;
+           
             $cached = $this->get($key, $group, false, $found);
 
-            if (false !== $found) {
+            if (!$cached) {
                 $this->delete($key, $group);
                 return $cached;
             }
